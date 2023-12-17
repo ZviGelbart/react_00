@@ -17,8 +17,8 @@ export default function Content({ items }) {
   const [itemD, setItemD] = useState()
   const [displayItems, setDisplayItems] = useState(items)
 
-  useEffect(() => { setDisplayItems(items) }, [items])
-
+  useEffect(() => { setDisplayItems(items);getIdFromUrl() }, [items])
+ 
   const getIdFromUrl = () => {
     let url = location.pathname.split('/')
     if (url[1] == 'item' && url[2]) {
@@ -27,7 +27,7 @@ export default function Content({ items }) {
     }
   }
 
-  useEffect(() => { getIdFromUrl() })
+  // useEffect(() => {  })
 
 
   const hanleColor = (c) => {
@@ -42,7 +42,7 @@ export default function Content({ items }) {
 
   return (
     <div className="content">
-      {itemD ?   Object.keys(itemD).length ? <ItemDetails item={itemD} />  : <ItemNotFound/>
+      {itemD ?   (Object.keys(itemD).length ? <ItemDetails item={itemD} />  : <ItemNotFound/>)
       : 
         <>
           <Menu hanleColor={hanleColor} hanleSearch={hanleSearch} colors={colors} />

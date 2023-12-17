@@ -38,21 +38,23 @@ export default function Item({ item, isInCart }) {
         {isInCart && <span>❌</span>}
       </div>
       <div>
-        <div
-          className={isInCart && "item-cart"}
-          style={{ cursor: "pointer" }}
-          onClick={() => (location.href = "http://localhost:5173/item/" + id)}
-        >
+        <div className={isInCart && 'item-cart'} style={{ cursor: 'pointer' }}
+          onClick={() => location.href = 'http://127.0.0.1:5173/item/' + id}>
+
           <div>{name}</div>
+
           <div>{emoji}</div>
           <div>{price}</div>
-          <div>
-            <button onClick={() => handlePlus(id)}>+</button>
-            <span>{cart[id]?.qty || 0}</span>
-            <button onClick={() => handleMinus(id)}>-</button>
-          </div>
+        </div>
+        <div>
+          <button onClick={() => handlePlus(id)}>+</button>
+          <span>{cart[id]?.qty || 0}</span>
+          <button onClick={() => handleMinus(id)}>-</button>
         </div>
       </div>
+
+
+
     </div>
   );
 }
