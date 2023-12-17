@@ -39,7 +39,7 @@ export default function Item({ item, isInCart }) {
       </div>
       <div>
         <div className={isInCart && 'item-cart'} style={{ cursor: 'pointer' }}
-          onClick={() => location.href = 'http://127.0.0.1:5173/item/' + id}>
+          onClick={() => location.href = 'http://localhost:5173/item/' + id}>
 
           <div>{name}</div>
 

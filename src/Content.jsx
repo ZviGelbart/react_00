@@ -3,13 +3,14 @@ import ItemList from "./ItemList";
 import Menu from "./Menu";
 import ItemDetails from "./ItemDetails";
 import ItemNotFound from "./ItemNotFound";
-
+import Categories from "./Categories"
+import { Route , Routes } from "react-router-dom";
 
 //                               props
 export default function Content({ items }) {
 
   // load >> check the url >> /item/:id >> take the :id
-  //  find item by id 
+  //  find item by id
   // if exist show only ItemDetails component with this item {}
   //  if not exist >> show Not Found
   //  regular url  >> show Menu & ItemList
@@ -42,13 +43,23 @@ export default function Content({ items }) {
 
   return (
     <div className="content">
-      {itemD ?   (Object.keys(itemD).length ? <ItemDetails item={itemD} />  : <ItemNotFound/>)
-      : 
+      {/* {itemD ?   (Object.keys(itemD).length ? <ItemDetails item={itemD} />  : <ItemNotFound/>)
+      :
         <>
+
+          <Categories/>
           <Menu hanleColor={hanleColor} hanleSearch={hanleSearch} colors={colors} />
           <ItemList displayItems={displayItems} />
+          
         </>
-      }
+      } */}
+    
+    <Routes>
+      <Route path="/" element={<Categories/>}/>
+      <Route path="/categories" element={<Categories/>}/>
+      <Route path="/categories/:catName" element={<ItemList/>}/>
+    </Routes>
+    
     </div>
   )
 }
