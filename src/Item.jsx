@@ -1,56 +1,58 @@
-import { useContext, useState } from 'react'
-import CartContext from './context/CartContext'
+import { useContext } from "react";
+import CartContext from "./context/CartContext";
 
 export default function Item({ item, isInCart }) {
-  let { name, price, emoji, id } = item
+  let { name, price, emoji, id } = item;
   //  get context >>> useContext , MyContextEngine
 
-  const { cart, setCart } = useContext(CartContext)
+  const { cart, setCart } = useContext(CartContext);
 
   const handlePlus = (id) => {
-    let copied = { ...cart }
+    let copied = { ...cart };
     if (cart[id]) {
-      copied[id].qty += 1
+      copied[id].qty += 1;
+    } else {
+      copied[id] = { ...item, qty: 1 };
     }
-    else {
-      copied[id] = { ...item, qty: 1 }
-    }
-    setCart(copied)
-  }
+    setCart(copied);
+  };
   const handleMinus = (id) => {
     if (!cart[id]) return;
-    let copied = { ...cart }
+    let copied = { ...cart };
     if (copied[id].qty > 1) {
-      copied[id].qty -= 1
+      copied[id].qty -= 1;
+    } else {
+      delete copied[id];
     }
-    else {
-      delete copied[id]
-    }
-    setCart(copied)
-  }
+    setCart(copied);
+  };
   const handleRemove = (id) => {
-    let copied = { ...cart }
-    delete copied[id]
-    setCart(copied)
-  }
+    let copied = { ...cart };
+    delete copied[id];
+    setCart(copied);
+  };
 
   return (
-    <div className='item'>
-      <div className='recycle' onClick={() => handleRemove(id)}>
+    <div className="item">
+      <div className="recycle" onClick={() => handleRemove(id)}>
         {isInCart && <span>❌</span>}
       </div>
-      <div className={isInCart && 'item-cart'} style={{ cursor: 'pointer' }}
-        onClick={() => location.href = 'http://127.0.0.1:5173/item/' + id}>
-        <div>{name}</div>
-        <div>{emoji}</div>
-        <div>{price}</div>
-        <div>
-          <button onClick={() => handlePlus(id)}>+</button>
-          <span>{cart[id]?.qty || 0}</span>
-          <button onClick={() => handleMinus(id)}>-</button>
+      <div>
+        <div
+          className={isInCart && "item-cart"}
+          style={{ cursor: "pointer" }}
+          onClick={() => (location.href = "http://localhost:5173/item/" + id)}
+        >
+          <div>{name}</div>
+          <div>{emoji}</div>
+          <div>{price}</div>
+          <div>
+            <button onClick={() => handlePlus(id)}>+</button>
+            <span>{cart[id]?.qty || 0}</span>
+            <button onClick={() => handleMinus(id)}>-</button>
+          </div>
         </div>
       </div>
-
     </div>
-  )
+  );
 }
